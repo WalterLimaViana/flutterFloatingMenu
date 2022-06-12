@@ -8,17 +8,42 @@ class FabMenuButton extends StatefulWidget {
   State<FabMenuButton> createState() => _FabMenuButtonState();
 }
 
-class _FabMenuButtonState extends State<FabMenuButton> {
+class _FabMenuButtonState extends State<FabMenuButton>
+    with SingleTickerProviderStateMixin {
   final actionButtonColor = Colors.tealAccent.shade100;
+  late final AnimationController animation;
+  final menuIsOpen = ValueNotifier<bool>(false);
+
+  @override
+  void initState() {
+    super.initState();
+    animation =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+  }
+
+  @override
+  void dispose() {
+    animation.dispose();
+    super.dispose();
+  }
+
+  toggleMenu() {
+    menuIsOpen.value ? animation.reverse() : animation.forward();
+    menuIsOpen.value = !menuIsOpen.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Flow(
       clipBehavior: Clip.none,
-      delegate: FabVerticalDelegate(),
+      delegate: FabVerticalDelegate(animation: animation),
       children: [
         FloatingActionButton(
-          child: const Icon(Icons.menu),
-          onPressed: () {},
+          child: AnimatedIcon(
+            icon: AnimatedIcons.menu_close,
+            progress: animation,
+          ),
+          onPressed: () => toggleMenu(),
         ),
         FloatingActionButton(
           child: const Icon(Icons.camera_alt_rounded),
