@@ -1,16 +1,12 @@
 # flutter_floating_menu
 
-A new Flutter project.
+Projeto Barebaria, utilizando o flutter floating menu
 
-## Getting Started
+## Objetivo
 
-This project is a starting point for a Flutter application.
+O objetivo desse projeto é criar um pequeno aplicativo de Barbaria, baseado em um repositório desenvolvido em HTML e CSS. Os pontos principais são:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Permitir o agendamento pelo usuário de barbeiros nos horários permitidos;
+- Criar um cadastro com login e senha utilizando um email válido;
+- Mostrar uma breve apresentação do local;
+- Exibir a localização do estabelecimento.
