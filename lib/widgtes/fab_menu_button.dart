@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_menu/delegates/fab_vertical_delegate.dart';
+import 'package:flutter_floating_menu/pages/calendario_page.dart';
+import 'package:flutter_floating_menu/pages/contato_page.dart';
 
 class FabMenuButton extends StatefulWidget {
   FabMenuButton({Key? key}) : super(key: key);
@@ -46,18 +48,22 @@ class _FabMenuButtonState extends State<FabMenuButton>
           onPressed: () => toggleMenu(),
         ),
         FloatingActionButton(
-          child: const Icon(Icons.camera_alt_rounded),
+          child: const Icon(Icons.home),
           onPressed: () {},
           backgroundColor: actionButtonColor,
         ),
         FloatingActionButton(
-          child: const Icon(Icons.link),
-          onPressed: () {},
+          child: const Icon(Icons.calendar_month),
+          onPressed: () {
+            CalendarioPage();
+          },
           backgroundColor: actionButtonColor,
         ),
         FloatingActionButton(
-          child: const Icon(Icons.attach_file),
-          onPressed: () {},
+          child: const Icon(Icons.phone),
+          onPressed: () {
+            ContatoPage();
+          },
           backgroundColor: actionButtonColor,
         ),
       ],

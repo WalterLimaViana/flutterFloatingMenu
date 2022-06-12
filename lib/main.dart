@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_floating_menu/pages/button_page.dart';
+import 'package:flutter_floating_menu/pages/home_page.dart';
 
 void main() {
   runApp(const App());
@@ -11,11 +11,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter FAB Demo',
+      title: 'Barbearia Pirate',
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: ButtonPage(),
+      home: HomePage(),
     );
   }
 }
