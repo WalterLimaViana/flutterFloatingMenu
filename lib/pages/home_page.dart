@@ -14,9 +14,32 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Barbearia Pirate'),
+        title: Center(
+          child: Text(
+            'Darbe\'s Barber Shop',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
-      body: Column(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 20),
+            child: Image.asset('img/logoBarber.png', height: 200, width: 200),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            child: Text(
+              'Selecione um serviço:',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
       floatingActionButton: FabMenuButton(),
     );
   }
