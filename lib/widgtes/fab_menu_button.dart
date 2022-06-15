@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_floating_menu/delegates/fab_vertical_delegate.dart';
 import 'package:flutter_floating_menu/pages/calendario_page.dart';
 import 'package:flutter_floating_menu/pages/contato_page.dart';
+import 'package:flutter_floating_menu/pages/home_page.dart';
 
 class FabMenuButton extends StatefulWidget {
   FabMenuButton({Key? key}) : super(key: key);
@@ -34,6 +35,21 @@ class _FabMenuButtonState extends State<FabMenuButton>
     menuIsOpen.value = !menuIsOpen.value;
   }
 
+  toggleHome() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
+  }
+
+  toggleAgendamento() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => CalendarioPage()));
+  }
+
+  toggleContato() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ContatoPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Flow(
@@ -49,14 +65,12 @@ class _FabMenuButtonState extends State<FabMenuButton>
         ),
         FloatingActionButton(
           child: const Icon(Icons.home),
-          onPressed: () {},
+          onPressed: () => toggleHome(),
           backgroundColor: actionButtonColor,
         ),
         FloatingActionButton(
           child: const Icon(Icons.calendar_month),
-          onPressed: () {
-            CalendarioPage();
-          },
+          onPressed: () => toggleAgendamento(),
           backgroundColor: actionButtonColor,
         ),
         FloatingActionButton(
