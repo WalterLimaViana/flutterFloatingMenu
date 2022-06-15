@@ -41,60 +41,64 @@ class _HomePageState extends State<HomePage>
                 textAlign: TextAlign.center,
               ),
             ),
-            Expanded(child:
-                ListView.builder(itemBuilder: (BuildContext ctx, int index) {
-              return GestureDetector(
-                onTap: (() {
-                  onCardClick();
-                }),
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  height: 150,
-                  child: Stack(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(categories[index].imgName!)),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              width: 180,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+            Expanded(
+                child: ListView.builder(
+                    itemCount: categories.length,
+                    itemBuilder: (BuildContext ctx, int index) {
+                      return GestureDetector(
+                        onTap: (() {
+                          onCardClick();
+                        }),
+                        child: Container(
+                          margin: EdgeInsets.all(20),
+                          height: 150,
+                          child: Stack(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Text(
-                                    categories[index].name!,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    categories[index].descricao!,
-                                  ),
-                                  Text(
-                                    categories[index].preco!,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.asset(
+                                          categories[index].imgName!)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      width: 180,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            categories[index].name!,
+                                            style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            categories[index].descricao!,
+                                          ),
+                                          Text(
+                                            categories[index].preco!,
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
+                              )
+                            ],
                           ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }))
+                        ),
+                      );
+                    }))
           ],
         ),
       ),

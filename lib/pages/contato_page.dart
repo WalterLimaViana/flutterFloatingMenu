@@ -11,7 +11,9 @@ class _ContatoPageState extends State<ContatoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Contato"),
+      ),
     );
   }
 }

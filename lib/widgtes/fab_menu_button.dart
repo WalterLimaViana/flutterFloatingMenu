@@ -75,9 +75,7 @@ class _FabMenuButtonState extends State<FabMenuButton>
         ),
         FloatingActionButton(
           child: const Icon(Icons.phone),
-          onPressed: () {
-            ContatoPage();
-          },
+          onPressed: () => toggleContato(),
           backgroundColor: actionButtonColor,
         ),
       ],
