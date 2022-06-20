@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_floating_menu/helpers/utils.dart';
-import 'package:flutter_floating_menu/models/category.dart';
-import 'package:flutter_floating_menu/pages/calendario_page.dart';
-import 'package:flutter_floating_menu/widgtes/fab_menu_button.dart';
+import 'package:appBarbearia/helpers/utils.dart';
+import 'package:appBarbearia/models/category.dart';
+import 'package:appBarbearia/pages/calendario_page.dart';
+import 'package:appBarbearia/widgtes/fab_menu_button.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -46,11 +46,9 @@ class _HomePageState extends State<HomePage>
                     itemCount: categories.length,
                     itemBuilder: (BuildContext ctx, int index) {
                       return GestureDetector(
-                        onTap: (() {
-                          onCardClick();
-                        }),
+                        onTap: (() {}),
                         child: Container(
-                          margin: EdgeInsets.all(20),
+                          margin: EdgeInsets.all(30),
                           height: 150,
                           child: Stack(
                             children: [
@@ -62,7 +60,8 @@ class _HomePageState extends State<HomePage>
                                       child: Image.asset(
                                           categories[index].imgName!)),
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 10, left: 20, bottom: 10),
                                     child: Container(
                                       width: 180,
                                       child: Column(
