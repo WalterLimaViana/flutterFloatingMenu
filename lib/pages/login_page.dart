@@ -1,3 +1,4 @@
+import 'package:appBarbearia/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -35,6 +36,9 @@ class _LoginPageState extends State<LoginPage> {
             height: 30.0,
           ),
           TextField(
+            onChanged: (text) {
+              password = text;
+            },
             obscureText: true,
             decoration: InputDecoration(
               labelText: 'Password',
@@ -46,7 +50,15 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(height: 30.0),
           ElevatedButton(
             child: Text('Entrar'),
-            onPressed: () {},
+            onPressed: () {
+              if (email == 'walter.lima.viana@gmail.com' &&
+                  password == '123456') {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              }
+            },
           ),
         ],
       ),
