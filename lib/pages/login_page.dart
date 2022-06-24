@@ -24,6 +24,12 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Container(
+                  child: Image.asset(
+                'img/logoBarber.png',
+                height: 160,
+              )),
+              SizedBox(height: 50.0),
               TextField(
                 onChanged: (text) {
                   email = text;
@@ -54,15 +60,11 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 30.0),
               ElevatedButton(
                 child: Text('Entrar'),
-                onPressed: () {
-                  if (email == 'walter.lima.viana@gmail.com' &&
-                      password == '123456') {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  }
-                },
+                onPressed: () {},
+              ),
+              SizedBox(height: 30.0),
+              Text(
+                'Não possui uma conta? Cadastre-se.',
               ),
             ],
           ),
