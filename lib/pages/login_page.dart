@@ -1,4 +1,5 @@
 import 'package:appBarbearia/pages/home_page.dart';
+import 'package:appBarbearia/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -60,16 +61,35 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 30.0),
               ElevatedButton(
                 child: Text('Entrar'),
-                onPressed: () {},
+                onPressed: () {
+                  if (email == 'walter.lima.viana@gmail.com' &&
+                      password == '123456') {
+                    signIn();
+                  }
+                },
               ),
               SizedBox(height: 30.0),
-              Text(
-                'Não possui uma conta? Cadastre-se.',
+              GestureDetector(
+                onTap: () {
+                  signUp();
+                },
+                child: Text(
+                  'Não possui uma conta? Cadastre-se.',
+                ),
               ),
             ],
           ),
         ),
       ),
     ));
+  }
+
+  signIn() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
+  }
+
+  signUp() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
   }
 }
