@@ -26,10 +26,11 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  child: Image.asset(
-                'img/logoBarber.png',
-                height: 160,
-              )),
+                child: Image.asset(
+                  'img/logoBarber.png',
+                  height: 160,
+                ),
+              ),
               SizedBox(height: 50.0),
               TextField(
                 onChanged: (text) {
