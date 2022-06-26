@@ -42,7 +42,11 @@ class _FabMenuButtonState extends State<FabMenuButton>
 
   toggleAgendamento() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CalendarioPage()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => CalendarioPage(
+                  title: 'Agendamento',
+                )));
   }
 
   toggleContato() {

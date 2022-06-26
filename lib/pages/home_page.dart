@@ -106,6 +106,10 @@ class _HomePageState extends State<HomePage> {
 
   onCardClick() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CalendarioPage()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => CalendarioPage(
+                  title: 'Agendamento',
+                )));
   }
 }
