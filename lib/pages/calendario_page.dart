@@ -16,10 +16,9 @@ class CalendarioPage extends StatefulWidget {
 }
 
 class _CalendarioPageState extends State<CalendarioPage> {
-  DateTime _currentDate = DateTime(2019, 2, 3);
-  DateTime _currentDate2 = DateTime(2019, 2, 3);
-  String _currentMonth = DateFormat.yMMM().format(DateTime(2019, 2, 3));
-  DateTime _targetDateTime = DateTime(2019, 2, 3);
+  DateTime _currentDate = DateTime.now();
+  String _currentMonth = DateFormat.yMMM().format(DateTime.now());
+  DateTime _targetDateTime = DateTime.now();
 
   static Widget _eventIcon = new Container(
     decoration: new BoxDecoration(
@@ -34,9 +33,9 @@ class _CalendarioPageState extends State<CalendarioPage> {
 
   EventList<Event> _markedDateMap = new EventList<Event>(
     events: {
-      new DateTime(2019, 2, 10): [
+      new DateTime(2022, 2, 10): [
         new Event(
-          date: new DateTime(2019, 2, 10),
+          date: new DateTime(2022, 2, 10),
           title: 'Event 1',
           icon: _eventIcon,
           dot: Container(
@@ -46,16 +45,6 @@ class _CalendarioPageState extends State<CalendarioPage> {
             width: 5.0,
           ),
         ),
-        new Event(
-          date: new DateTime(2019, 2, 10),
-          title: 'Event 2',
-          icon: _eventIcon,
-        ),
-        new Event(
-          date: new DateTime(2019, 2, 10),
-          title: 'Event 3',
-          icon: _eventIcon,
-        ),
       ],
     },
   );
@@ -64,34 +53,34 @@ class _CalendarioPageState extends State<CalendarioPage> {
   void initState() {
     /// Add more events to _markedDateMap EventList
     _markedDateMap.add(
-        new DateTime(2019, 2, 25),
+        new DateTime(2022, 2, 25),
         new Event(
-          date: new DateTime(2019, 2, 25),
+          date: new DateTime(2022, 2, 25),
           title: 'Event 5',
           icon: _eventIcon,
         ));
 
     _markedDateMap.add(
-        new DateTime(2019, 2, 10),
+        new DateTime(2022, 2, 10),
         new Event(
-          date: new DateTime(2019, 2, 10),
+          date: new DateTime(2022, 2, 10),
           title: 'Event 4',
           icon: _eventIcon,
         ));
 
-    _markedDateMap.addAll(new DateTime(2019, 2, 11), [
+    _markedDateMap.addAll(new DateTime(2022, 2, 11), [
       new Event(
-        date: new DateTime(2019, 2, 11),
+        date: new DateTime(2022, 2, 11),
         title: 'Event 1',
         icon: _eventIcon,
       ),
       new Event(
-        date: new DateTime(2019, 2, 11),
+        date: new DateTime(2022, 2, 11),
         title: 'Event 2',
         icon: _eventIcon,
       ),
       new Event(
-        date: new DateTime(2019, 2, 11),
+        date: new DateTime(2022, 2, 11),
         title: 'Event 3',
         icon: _eventIcon,
       ),
@@ -104,7 +93,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
     final _calendarCarouselNoHeader = CalendarCarousel<Event>(
       todayBorderColor: Colors.green,
       onDayPressed: (date, events) {
-        this.setState(() => _currentDate2 = date);
+        this.setState(() => _currentDate = date);
         events.forEach((event) => print(event.title));
       },
       daysHaveCircularBorder: true,
@@ -117,7 +106,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
 //      firstDayOfWeek: 4,
       markedDatesMap: _markedDateMap,
       height: 420.0,
-      selectedDateTime: _currentDate2,
+      selectedDateTime: _currentDate,
       targetDateTime: _targetDateTime,
       customGridViewPhysics: NeverScrollableScrollPhysics(),
       markedDateCustomShapeBorder:
@@ -142,7 +131,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
         color: Colors.yellow,
       ),
       minSelectedDate: _currentDate.subtract(Duration(days: 360)),
-      maxSelectedDate: _currentDate.add(Duration(days: 360)),
+      maxSelectedDate: _currentDate.add(Duration(days: 720)),
       prevDaysTextStyle: TextStyle(
         fontSize: 16,
         color: Colors.pinkAccent,
@@ -158,10 +147,10 @@ class _CalendarioPageState extends State<CalendarioPage> {
         });
       },
       onDayLongPressed: (DateTime date) {
-        print('long pressed date $date');
+        // print('long pressed date $date');
       },
     );
-    return new Scaffold(
+    return Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
@@ -170,11 +159,6 @@ class _CalendarioPageState extends State<CalendarioPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            //custom icon
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              child: _calendarCarouselNoHeader,
-            ), // This trailing comma makes auto-formatting nicer for build methods.
             //custom icon without header
             Container(
               margin: EdgeInsets.only(
