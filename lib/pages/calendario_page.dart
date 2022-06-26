@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
-import 'package:flutter_calendar_carousel/classes/event.dart';
+// import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
@@ -179,7 +179,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
                       fontSize: 24.0,
                     ),
                   )),
-                  FlatButton(
+                  TextButton(
                     child: Text('PREV'),
                     onPressed: () {
                       setState(() {
@@ -190,7 +190,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
                       });
                     },
                   ),
-                  FlatButton(
+                  TextButton(
                     child: Text('NEXT'),
                     onPressed: () {
                       setState(() {
@@ -208,10 +208,12 @@ class _CalendarioPageState extends State<CalendarioPage> {
               margin: EdgeInsets.symmetric(horizontal: 16.0),
               child: _calendarCarouselNoHeader,
             ),
+
             SizedBox(
               height: 10.0,
             ),
             Container(
+              // mostrar eventos do dia
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text('Eventos'),

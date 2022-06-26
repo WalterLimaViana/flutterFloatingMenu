@@ -1,3 +1,4 @@
+import 'package:appBarbearia/widgtes/add_event.dart';
 import 'package:flutter/material.dart';
 import 'package:appBarbearia/helpers/utils.dart';
 import 'package:appBarbearia/models/category.dart';
@@ -45,7 +46,10 @@ class _HomePageState extends State<HomePage> {
                     itemCount: categories.length,
                     itemBuilder: (BuildContext ctx, int index) {
                       return GestureDetector(
-                        onTap: (() {}),
+                        onTap: (() {
+                          //criar classe para salvar o serviço omo um evento no calendário
+                          add_event();
+                        }),
                         child: Container(
                           margin: EdgeInsets.all(30),
                           height: 150,
@@ -111,5 +115,13 @@ class _HomePageState extends State<HomePage> {
             builder: (context) => CalendarioPage(
                   title: 'Agendamento',
                 )));
+  }
+
+  add_event() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddEvent(),
+        ));
   }
 }
