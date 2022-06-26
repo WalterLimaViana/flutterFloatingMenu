@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 50.0),
               TextField(
+                textInputAction: TextInputAction.next,
                 onChanged: (text) {
                   email = text;
                 },

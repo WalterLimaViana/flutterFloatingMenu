@@ -1,3 +1,4 @@
+import 'package:appBarbearia/pages/calendario_page.dart';
 import 'package:appBarbearia/pages/login_page.dart';
 import 'package:appBarbearia/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Barbearia Pirate',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      home: SignUp(),
-    );
+        title: 'Barbearia Pirate',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+        ),
+        home: LoginPage());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:appBarbearia/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -59,6 +60,16 @@ class _SignUpState extends State<SignUp> {
                 ElevatedButton(
                   onPressed: () {},
                   child: Text('Cadastrar'),
+                ),
+                SizedBox(height: 30.0),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text(
+                    'Já é cadastrado? Faça o login.',
+                  ),
                 ),
               ],
             ),

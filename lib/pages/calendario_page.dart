@@ -33,9 +33,9 @@ class _CalendarioPageState extends State<CalendarioPage> {
 
   EventList<Event> _markedDateMap = new EventList<Event>(
     events: {
-      new DateTime(2022, 2, 10): [
+      new DateTime(2022, 6, 10): [
         new Event(
-          date: new DateTime(2022, 2, 10),
+          date: new DateTime(2022, 6, 10),
           title: 'Event 1',
           icon: _eventIcon,
           dot: Container(
@@ -53,34 +53,34 @@ class _CalendarioPageState extends State<CalendarioPage> {
   void initState() {
     /// Add more events to _markedDateMap EventList
     _markedDateMap.add(
-        new DateTime(2022, 2, 25),
+        new DateTime(2022, 6, 25),
         new Event(
-          date: new DateTime(2022, 2, 25),
+          date: new DateTime(2022, 6, 25),
           title: 'Event 5',
           icon: _eventIcon,
         ));
 
     _markedDateMap.add(
-        new DateTime(2022, 2, 10),
+        new DateTime(2022, 6, 10),
         new Event(
-          date: new DateTime(2022, 2, 10),
+          date: new DateTime(2022, 6, 10),
           title: 'Event 4',
           icon: _eventIcon,
         ));
 
     _markedDateMap.addAll(new DateTime(2022, 2, 11), [
       new Event(
-        date: new DateTime(2022, 2, 11),
+        date: new DateTime(2022, 6, 11),
         title: 'Event 1',
         icon: _eventIcon,
       ),
       new Event(
-        date: new DateTime(2022, 2, 11),
+        date: new DateTime(2022, 6, 11),
         title: 'Event 2',
         icon: _eventIcon,
       ),
       new Event(
-        date: new DateTime(2022, 2, 11),
+        date: new DateTime(2022, 6, 11),
         title: 'Event 3',
         icon: _eventIcon,
       ),
@@ -91,7 +91,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
   @override
   Widget build(BuildContext context) {
     final _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      todayBorderColor: Colors.green,
+      todayBorderColor: Color.fromARGB(255, 143, 150, 143),
       onDayPressed: (date, events) {
         this.setState(() => _currentDate = date);
         events.forEach((event) => print(event.title));
@@ -110,10 +110,10 @@ class _CalendarioPageState extends State<CalendarioPage> {
       targetDateTime: _targetDateTime,
       customGridViewPhysics: NeverScrollableScrollPhysics(),
       markedDateCustomShapeBorder:
-          CircleBorder(side: BorderSide(color: Colors.yellow)),
+          CircleBorder(side: BorderSide(color: Colors.grey)),
       markedDateCustomTextStyle: TextStyle(
         fontSize: 18,
-        color: Colors.blue,
+        color: Colors.white,
       ),
       showHeader: false,
       todayTextStyle: TextStyle(
@@ -128,7 +128,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
       //     true,
       todayButtonColor: Colors.yellow,
       selectedDayTextStyle: TextStyle(
-        color: Colors.yellow,
+        color: Colors.white,
       ),
       minSelectedDate: _currentDate.subtract(Duration(days: 360)),
       maxSelectedDate: _currentDate.add(Duration(days: 720)),
@@ -137,7 +137,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
         color: Colors.pinkAccent,
       ),
       inactiveDaysTextStyle: TextStyle(
-        color: Colors.tealAccent,
+        color: Color.fromARGB(255, 255, 144, 100),
         fontSize: 16,
       ),
       onCalendarChanged: (DateTime date) {
@@ -152,7 +152,9 @@ class _CalendarioPageState extends State<CalendarioPage> {
     );
     return Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: Center(
+          child: new Text(widget.title),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -205,7 +207,16 @@ class _CalendarioPageState extends State<CalendarioPage> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16.0),
               child: _calendarCarouselNoHeader,
-            ), //
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Eventos'),
+              ),
+            ) //
           ],
         ),
       ),
