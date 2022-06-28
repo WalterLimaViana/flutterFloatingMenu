@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
+import 'package:intl/intl.dart';
 
 class AddEvent extends StatefulWidget {
   AddEvent({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
+  final _formKey = GlobalKey<FormState>();
   static Widget _eventIcon = new Container(
     decoration: new BoxDecoration(
         color: Colors.white,
@@ -38,6 +40,7 @@ class _AddEventState extends State<AddEvent> {
       }
       setState(() {
         date = newDate;
+        String formattedDate = DateFormat('yyyy/MM/dd').format(newDate);
       });
     });
   }
@@ -49,25 +52,33 @@ class _AddEventState extends State<AddEvent> {
         leading: CloseButton(),
         actions: buildEditingActions(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            children: [
-              // Text('${date.year}/${date.month}/${date.day}'),
-              const SizedBox(
-                height: 16,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  // Text('${date.year}/${date.month}/${date.day}'),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    child: Text(
+                      date != null
+                          ? date.toString()
+                          : 'Nenhuma data Selecionada',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: _datePicker,
+                    child: Text('Selecione a data'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: _datePicker,
-                child: Text('Selecione a data'),
-              ),
-              Container(
-                  child: Text(
-                date != null ? date.toString() : 'Nenhuma data Selecionada',
-                style: TextStyle(fontSize: 30),
-              ))
-            ],
+            ),
           ),
         ),
       ),
