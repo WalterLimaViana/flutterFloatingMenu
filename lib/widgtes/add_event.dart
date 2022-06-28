@@ -1,290 +1,76 @@
-import 'package:appBarbearia/models/events.dart';
 import 'package:flutter/material.dart';
-import 'package:appBarbearia/helpers/util.dart';
-import 'package:appBarbearia/helpers/utils.dart';
-import 'package:appBarbearia/models/category.dart';
-
-import 'package:appBarbearia/provider/event_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_calendar_carousel/classes/event.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 
 class AddEvent extends StatefulWidget {
-  final Events? event;
-
-  const AddEvent({
-    Key? key,
-    this.event,
-  }) : super(key: key);
+  AddEvent({Key? key}) : super(key: key);
 
   @override
   State<AddEvent> createState() => _AddEventState();
 }
 
 class _AddEventState extends State<AddEvent> {
-  final _formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
-  late DateTime fromDate;
-  late DateTime toDate;
-  List<Category> categories = Utils.getMockedCategories();
+  static Widget _eventIcon = new Container(
+    decoration: new BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(1000)),
+        border: Border.all(color: Colors.blue, width: 2.0)),
+    child: new Icon(
+      Icons.person,
+      color: Colors.amber,
+    ),
+  );
+  EventList<Event> _markedDateMap = new EventList<Event>(
+    events: {},
+  );
 
-  @override
-  void initState() {
-    super.initState();
+  DateTime? date;
 
-    if (widget.event == null) {
-      fromDate = DateTime.now();
-      toDate = DateTime.now().add(Duration(
-        minutes: 40,
-      ));
-    }
-  }
-
-  @override
-  void dispose() {
-    titleController.dispose();
-    super.dispose();
+  void _datePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+    ).then((newDate) {
+      if (newDate == null) {
+        return;
+      }
+      setState(() {
+        date = newDate;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        actions: buildEditingActions(),
+        title: Text('Agendamentos'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                buildTitle(),
-                SizedBox(
-                  height: 12,
-                ),
-                buildDateTimePickers(),
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: [
+              Text('Selecione o dia:'),
+              // Text('${date.year}/${date.month}/${date.day}'),
+              const SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                onPressed: _datePicker,
+                child: Text('Selecione a data'),
+              ),
+              Container(
+                  child: Text(
+                date != null ? date.toString() : 'Nenhuma data Selecionada',
+                style: TextStyle(fontSize: 30),
+              ))
+            ],
           ),
         ),
       ),
-    );
-  }
-
-  List<Widget> buildEditingActions() => [
-        ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.transparent,
-            shadowColor: Colors.transparent,
-          ),
-          onPressed: saveForm,
-          icon: Icon(Icons.done),
-          label: Text('Salvar'),
-        )
-      ];
-
-  Widget buildTitle() => TextFormField(
-        style: TextStyle(
-          fontSize: 24,
-        ),
-        decoration: InputDecoration(
-          border: UnderlineInputBorder(),
-        ),
-        onFieldSubmitted: (_) => saveForm(),
-        validator: (title) => title != null && title.isEmpty
-            ? 'Serviço não pode ficar vazio'
-            : null,
-        controller: titleController,
-      );
-
-  Widget buildDateTimePickers() => Column(
-        children: [
-          buildFrom(),
-          buildTo(),
-        ],
-      );
-
-  Widget buildFrom() => buildHeader(
-        header: 'De',
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: buildDropdownField(
-                text: Util.toDate(fromDate),
-                onClicked: () => pickFromDateTime(pickDate: true),
-              ),
-            ),
-            Expanded(
-              child: buildDropdownField(
-                text: Util.toTime(fromDate),
-                onClicked: () => pickFromDateTime(pickDate: false),
-              ),
-            ),
-          ],
-        ),
-      );
-
-  Widget buildTo() => buildHeader(
-        header: 'Até',
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: buildDropdownField(
-                text: Util.toDate(toDate),
-                onClicked: () => pickToDateTime(pickDate: true),
-              ),
-            ),
-            Expanded(
-              child: buildDropdownField(
-                text: Util.toTime(toDate),
-                onClicked: () => pickToDateTime(pickDate: false),
-              ),
-            ),
-          ],
-        ),
-      );
-  Future pickFromDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(fromDate, pickDate: pickDate);
-    if (date == null) return;
-
-    if (date.isAfter(toDate)) {
-      toDate = DateTime(
-        date.year,
-        date.month,
-        date.day,
-        toDate.hour,
-        toDate.minute,
-      );
-    }
-
-    setState(() => fromDate = date);
-  }
-
-  Future pickToDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(
-      toDate,
-      pickDate: pickDate,
-      firstDate: pickDate ? fromDate : null,
-    );
-    if (date == null) return;
-
-    if (date.isAfter(toDate)) {
-      toDate = DateTime(
-        date.year,
-        date.month,
-        date.day,
-        toDate.hour,
-        toDate.minute,
-      );
-    }
-
-    setState(() => toDate = date);
-  }
-
-  Future<DateTime?> pickDateTime(
-    DateTime initialDate, {
-    required bool pickDate,
-    DateTime? firstDate,
-  }) async {
-    if (pickDate) {
-      final date = await showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        firstDate: firstDate ?? DateTime(2015, 8),
-        lastDate: DateTime(2101),
-      );
-
-      if (date == null) return null;
-
-      final time = Duration(
-        hours: initialDate.hour,
-        minutes: initialDate.minute,
-      );
-
-      return date.add(time);
-    } else {
-      final timeOfDay = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.fromDateTime(initialDate),
-      );
-
-      if (timeOfDay == null) return null;
-
-      final date = DateTime(
-        initialDate.year,
-        initialDate.month,
-        initialDate.day,
-      );
-
-      final time = Duration(
-        hours: timeOfDay.hour,
-        minutes: timeOfDay.minute,
-      );
-
-      return date.add(time);
-    }
-  }
-
-  Widget buildDropdownField({
-    required String text,
-    required VoidCallback onClicked,
-  }) =>
-      ListTile(
-        title: Text(text),
-        trailing: Icon(Icons.arrow_drop_down),
-        onTap: onClicked,
-      );
-
-  Widget buildHeader({required String header, required Widget child}) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            header,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          child,
-        ],
-      );
-
-  Future saveForm() async {
-    final isValid = _formKey.currentState!.validate();
-
-    if (isValid) {
-      final event = Events(
-        title: titleController.text,
-        description: 'Descrição',
-        from: fromDate,
-        to: toDate,
-      );
-
-      final provider = Provider.of<EventProvider>(context, listen: false);
-      provider.addEvent(event);
-      Navigator.of(context).pop();
-    }
-  }
-
-  Widget criaDropDownButton() {
-    String dropDownValue = 'Cabelo';
-
-    return DropdownButton<String>(
-      value: dropDownValue,
-      icon: Icon(Icons.arrow_drop_down),
-      elevation: 10,
-      items: <String>['Barba', 'Cabelo', 'Cabelo e Barba']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      onChanged: (String? newValue) {
-        setState(() {
-          dropDownValue = newValue!;
-        });
-      },
     );
   }
 }
