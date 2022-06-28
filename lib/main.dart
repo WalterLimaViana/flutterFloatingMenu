@@ -1,6 +1,7 @@
 import 'package:appBarbearia/pages/calendario_page.dart';
 import 'package:appBarbearia/pages/login_page.dart';
 import 'package:appBarbearia/pages/sign_up_page.dart';
+import 'package:appBarbearia/widgtes/add_event.dart';
 import 'package:flutter/material.dart';
 import 'package:appBarbearia/pages/category_list_page.dart';
 import 'package:appBarbearia/pages/home_page.dart';
@@ -19,6 +20,6 @@ class App extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.dark,
         ),
-        home: LoginPage());
+        home: AddEvent());
   }
 }

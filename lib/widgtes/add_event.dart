@@ -46,14 +46,14 @@ class _AddEventState extends State<AddEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agendamentos'),
+        leading: CloseButton(),
+        actions: buildEditingActions(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Column(
             children: [
-              Text('Selecione o dia:'),
               // Text('${date.year}/${date.month}/${date.day}'),
               const SizedBox(
                 height: 16,
@@ -73,4 +73,16 @@ class _AddEventState extends State<AddEvent> {
       ),
     );
   }
+
+  List<Widget> buildEditingActions() => [
+        ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.transparent,
+            shadowColor: Colors.transparent,
+          ),
+          onPressed: () {},
+          icon: Icon(Icons.done),
+          label: Text('Salvar'),
+        )
+      ];
 }

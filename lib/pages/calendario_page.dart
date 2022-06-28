@@ -216,7 +216,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
               // mostrar eventos do dia
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Eventos'),
+                child: Text('${_markedDateMap}'),
               ),
             ) //
           ],
