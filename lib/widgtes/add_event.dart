@@ -12,6 +12,9 @@ class AddEvent extends StatefulWidget {
 
 class _AddEventState extends State<AddEvent> {
   final _formKey = GlobalKey<FormState>();
+  DateTime? date;
+  String? title;
+
   static Widget _eventIcon = new Container(
     decoration: new BoxDecoration(
         color: Colors.white,
@@ -23,10 +26,22 @@ class _AddEventState extends State<AddEvent> {
     ),
   );
   EventList<Event> _markedDateMap = new EventList<Event>(
-    events: {},
+    events: {
+      new DateTime.now(): [
+        new Event(
+          date: new DateTime(2022, 6, 10),
+          title: 'Event 1',
+          icon: _eventIcon,
+          dot: Container(
+            margin: EdgeInsets.symmetric(horizontal: 1.0),
+            color: Colors.red,
+            height: 5.0,
+            width: 5.0,
+          ),
+        ),
+      ],
+    },
   );
-
-  DateTime? date;
 
   void _datePicker() {
     showDatePicker(
@@ -64,12 +79,13 @@ class _AddEventState extends State<AddEvent> {
                   const SizedBox(
                     height: 16,
                   ),
+
                   Container(
                     child: Text(
                       date != null
                           ? date.toString()
                           : 'Nenhuma data Selecionada',
-                      style: TextStyle(fontSize: 30),
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
                   ElevatedButton(
@@ -84,6 +100,9 @@ class _AddEventState extends State<AddEvent> {
       ),
     );
   }
+
+  Widget buildTitle() =>
+      TextFormField(decoration: InputDecoration(border: OutlineInputBorder()));
 
   List<Widget> buildEditingActions() => [
         ElevatedButton.icon(
