@@ -95,6 +95,12 @@ class _CalendarioPageState extends State<CalendarioPage> {
       onDayPressed: (date, events) {
         this.setState(() => _currentDate = date);
         events.forEach((event) => print(event.title));
+
+        if (events == null) {
+          return Container(
+            child: Text(events.toString()),
+          );
+        }
       },
       daysHaveCircularBorder: true,
       showOnlyCurrentMonthDate: false,
@@ -216,7 +222,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
               // mostrar eventos do dia
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('${_markedDateMap}'),
+                child: Text(''),
               ),
             ) //
           ],

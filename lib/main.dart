@@ -20,6 +20,6 @@ class App extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.dark,
         ),
-        home: AddEvent());
+        home: LoginPage());
   }
 }
